@@ -91,15 +91,15 @@ architecture RTL of AdcBlock is
   --signal gclk_adc                        : std_logic_vector(kNumADC-1 downto 0);
   signal adc_data                        : AdcDataBlockArray; -- 32 * 12
 
-  COMPONENT vio_adc
-  PORT (
-    clk         : IN  STD_LOGIC;
-    probe_out0  : OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
-    probe_out1  : OUT STD_LOGIC_VECTOR(4 DOWNTO 0);
-    probe_out2  : OUT STD_LOGIC_VECTOR(4 DOWNTO 0);
-    probe_out3  : OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
-  );
-  END COMPONENT;
+  --COMPONENT vio_adc
+  --PORT (
+  --  clk         : IN  STD_LOGIC;
+  --  probe_out0  : OUT STD_LOGIC_VECTOR(0 DOWNTO 0);
+  --  probe_out1  : OUT STD_LOGIC_VECTOR(4 DOWNTO 0);
+  --  probe_out2  : OUT STD_LOGIC_VECTOR(4 DOWNTO 0);
+  --  probe_out3  : OUT STD_LOGIC_VECTOR(0 DOWNTO 0)
+  --);
+  --END COMPONENT;
 
   -- Ring Buffer ------------------------------------------------------------
   signal rb_in                           : std_logic_vector(kNumAdcBit*kNumAdcInputBlock-1 downto 0); -- 32*12
@@ -338,14 +338,14 @@ begin
     end if;
   end process;
   
-  u_VIO : vio_adc
-    PORT MAP (
-      clk         => clkSys,
-      probe_out0  => adc_ro_reset_vio,
-      probe_out1  => tap_value_in,
-      probe_out2  => tap_value_frame_in,
-      probe_out3  => en_ext_tapin
-      );
+  --u_VIO : vio_adc
+  --  PORT MAP (
+  --    clk         => clkSys,
+  --    probe_out0  => adc_ro_reset_vio,
+  --    probe_out1  => tap_value_in,
+  --    probe_out2  => tap_value_frame_in,
+  --    probe_out3  => en_ext_tapin
+  --    );
   
   adc_ro_reset       <= reg_adc_ro_reset or adc_ro_reset_vio(0);
   u_ADC : entity mylib.AdcRO
